@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
-public class DeviceState
+public struct DeviceState
 {
-    Vector3 position;
+    public Vector3 position;
 
-    public void ChangeState()
+    public DeviceState(Vector3 position)
     {
-
+        this.position = position;
     }
 }
 

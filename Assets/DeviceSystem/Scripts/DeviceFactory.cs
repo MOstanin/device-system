@@ -12,13 +12,16 @@ public class DeviceFactory
     readonly WarningColisionHandler _warningColisionHandler;
     readonly WatingColisionHandler _waitingColisionHandler;
 
-
     [Inject]
-    public DeviceFactory(Device.Factory factory, AnalogChangeState analogChangeState, CancelColisionHandler cancelColisionHandler)
+    public DeviceFactory(Device.Factory factory, AnalogChangeState analogChangeState, DigitalChangeState digitalChangeState, 
+        CancelColisionHandler cancelColisionHandler, WarningColisionHandler warningColisionHandler, WatingColisionHandler waitingColisionHandler)
     {
         _factory = factory;
         _analogChangeState = analogChangeState;
+        _digitalChangeState = digitalChangeState;
         _cancelColisionHandler = cancelColisionHandler;
+        _warningColisionHandler = warningColisionHandler;
+        _waitingColisionHandler = waitingColisionHandler;
     }
 
     public Device Create(Device.DeviceTypes type)
@@ -30,7 +33,7 @@ public class DeviceFactory
         }
         else if (type == Device.DeviceTypes.Digital)
         {
-            return _factory.Create(_analogChangeState, _cancelColisionHandler);
+            return _factory.Create(_digitalChangeState, _cancelColisionHandler);
         }
 
         throw new System.Exception("Incorrect type");

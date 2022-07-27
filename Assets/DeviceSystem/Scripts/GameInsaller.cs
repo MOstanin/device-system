@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -20,7 +18,11 @@ public class GameInsaller : MonoInstaller {
 
         Container.Bind<DeviceFactory>().AsSingle();
         Container.Bind<AnalogChangeState>().WhenInjectedInto<DeviceFactory>();
+        Container.Bind<DigitalChangeState>().WhenInjectedInto<DeviceFactory>();
+
         Container.Bind<CancelColisionHandler>().WhenInjectedInto<DeviceFactory>();
+        Container.Bind<WarningColisionHandler>().WhenInjectedInto<DeviceFactory>();
+        Container.Bind<WatingColisionHandler>().WhenInjectedInto<DeviceFactory>();
 
         Container.BindFactory<IChangeState, ICollisionHandler, Device, Device.Factory>()
             .FromComponentInNewPrefab(_settings.DevicePrefab)

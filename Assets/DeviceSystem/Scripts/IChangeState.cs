@@ -2,5 +2,5 @@
 
 public interface IChangeState
 {
-    public void ChangeState(DeviceState state);
+    public DeviceState ChangeState(DeviceState oldState, DeviceState newState);
 }

@@ -1,7 +1,8 @@
 ﻿public class DigitalChangeState : IChangeState
 {
-    public void ChangeState(DeviceState state)
+
+    public DeviceState ChangeState(DeviceState oldState, DeviceState newState)
     {
-        throw new System.NotImplementedException();
+        return newState;
     }
 }
