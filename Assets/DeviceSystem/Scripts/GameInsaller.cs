@@ -11,6 +11,7 @@ public class GameInsaller : MonoInstaller {
     {
         InstallDevices();
         InstallGui();
+        InstallDevicesFormFile();
     }
 
     private void InstallDevices()
@@ -34,6 +35,10 @@ public class GameInsaller : MonoInstaller {
     private void InstallGui()
     {
         Container.Bind<GuiHandler>().AsSingle();
+    }
+    private void InstallDevicesFormFile()
+    {
+        Container.BindInterfacesAndSelfTo<DevicesJsonLoader>().AsSingle();
     }
 
     [Serializable]

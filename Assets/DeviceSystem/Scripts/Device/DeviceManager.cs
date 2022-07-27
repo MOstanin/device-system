@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class DeviceManager
+public class DeviceManager 
 {
     readonly List<Device> _devices = new List<Device>();
     readonly DeviceFactory _deviceFactory;
@@ -36,3 +36,4 @@ public class DeviceManager
         return devices;
     }
 }
+
