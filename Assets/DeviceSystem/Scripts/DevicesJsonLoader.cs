@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Zenject;
 
-class DevicesJsonLoader : IInitializable
+public class DevicesJsonLoader : IInitializable
 {
     [Inject]
     DeviceManager _deviceManager;
@@ -12,6 +12,28 @@ class DevicesJsonLoader : IInitializable
     {
         string s = ReadJsonFromFile(file);
         CreateDevicesFromJSON(s);
+    }
+
+    public void PrintDevicesAsJson()
+    {
+        var deviceList = _deviceManager.GetDevices();
+        var scheme = new DevicesScheme();
+        scheme.deviceArray = new DevicesScheme.Device[deviceList.Count];
+
+        for (int i = 0; i < deviceList.Count; i++)
+        {
+            scheme.deviceArray[i] = new DevicesScheme.Device();
+            if (deviceList[i].DeviceType == Device.DeviceTypes.Analog)
+            {
+                scheme.deviceArray[i].deviceType = 1;
+            }
+            else
+            {
+                scheme.deviceArray[i].deviceType = 2;
+            }
+        }
+        var s = JsonUtility.ToJson(scheme);
+        Debug.Log(s);
     }
 
     private string ReadJsonFromFile(string file)

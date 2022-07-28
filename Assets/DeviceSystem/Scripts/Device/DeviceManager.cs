@@ -35,5 +35,10 @@ public class DeviceManager
         }
         return devices;
     }
+
+    public List<Device> GetDevices()
+    {
+        return _devices;
+    }
 }
 

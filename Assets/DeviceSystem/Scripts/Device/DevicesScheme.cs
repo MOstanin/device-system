@@ -1,7 +1,10 @@
-﻿[System.Serializable]
+﻿
+[System.Serializable]
 public class DevicesScheme
 {
     public Device[] deviceArray;
+
+    [System.Serializable]
     public class Device
     {
         public int deviceType; //1 - analog, 2 - digital

@@ -13,11 +13,13 @@ public class GuiHandler: MonoBehaviour
     public Text deviceList;
 
     DeviceManager _deviceManager;
+    DevicesJsonLoader _devicesJsonLoader;
 
     [Inject]
-    public void Construct(DeviceManager deviceManager)
+    public void Construct(DeviceManager deviceManager, DevicesJsonLoader devicesJsonLoader)
     {
         _deviceManager = deviceManager;
+        _devicesJsonLoader = devicesJsonLoader;
     }
 
     public void AddAnalogDevice()
@@ -40,6 +42,11 @@ public class GuiHandler: MonoBehaviour
     public void FillDeviceList()
     {
         deviceList.text = _deviceManager.GetDeviceStringList();
+    }
+
+    public void SaveDevices()
+    {
+        _devicesJsonLoader.PrintDevicesAsJson();
     }
 
     private void Update()

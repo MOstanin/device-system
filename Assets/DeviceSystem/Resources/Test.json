@@ -1,11 +1,7 @@
 {
-  "array": [
-    1,
-    2,
-    3
-  ],
-  "boolean": true,
-  "color": "gold",
-  "null": null,
-  "number": 123
+  "deviceArray":
+  [
+    {"deviceType":1,"actionColisionType":0},
+    {"deviceType":1,"actionColisionType":0}
+  ]
 }
