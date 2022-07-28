@@ -2,10 +2,10 @@
 using UnityEngine;
 using Zenject;
 
-public class DeviceManager 
+public class DeviceManager
 {
-    readonly List<Device> _devices = new List<Device>();
-    readonly DeviceFactory _deviceFactory;
+    private readonly List<Device> _devices = new List<Device>();
+    private readonly DeviceFactory _deviceFactory;
 
     [Inject]
     public DeviceManager(DeviceFactory deviceFactory)

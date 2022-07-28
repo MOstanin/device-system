@@ -3,22 +3,21 @@ using Zenject;
 
 public class Device : MonoBehaviour
 {
-    IActionCollision _collisionHandler;
-    IAction _changeState;
+    private IActionCollision _collisionHandler;
+    private IAction _changeState;
+    private DeviceState _deviceState;
+    private DeviceState _targerDeviceState;
+    private bool isBusy;
 
-    DeviceState _deviceState;
-    DeviceState _targerDeviceState;
-
-    bool isBusy;
-
-    public enum DeviceTypes { Analog, Digital, CancelAction, WaitAction, warningAction};
+    public enum DeviceTypes { Analog, Digital, CancelAction, WaitAction, warningAction };
     private DeviceTypes _deviceType;
-    public DeviceTypes DeviceType { 
-        get => _deviceType; 
-        set => _deviceType = value; 
+    public DeviceTypes DeviceType
+    {
+        get => _deviceType;
+        set => _deviceType = value;
     }
 
-    public enum ActionCollisionTypes {CancelAction, WaitAction, WarningAction };
+    public enum ActionCollisionTypes { CancelAction, WaitAction, WarningAction };
     private ActionCollisionTypes _actionCollisionType;
     public ActionCollisionTypes ActionCollisionType
     {

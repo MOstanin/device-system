@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public  class AnalogAction : IAction
+public class AnalogAction : IAction
 {
-    float speed = 0.1f;
+    private readonly float speed = 0.1f;
 
     public DeviceState ChangeState(DeviceState oldState, DeviceState newState)
     {
@@ -10,7 +10,8 @@ public  class AnalogAction : IAction
         deviceState.position = UpdatePosition(oldState.position, newState.position);
         return deviceState;
     }
-    Vector3 UpdatePosition(Vector3 oldPos, Vector3 newPos)
+
+    private Vector3 UpdatePosition(Vector3 oldPos, Vector3 newPos)
     {
         Vector3 position = new Vector3();
         var v = newPos - oldPos;

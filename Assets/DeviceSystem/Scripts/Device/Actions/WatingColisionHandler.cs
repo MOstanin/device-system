@@ -1,6 +1,6 @@
 ﻿public class WatingColisionHandler : IActionCollision
 {
-    DeviceState nextDeviceState;
+    private DeviceState nextDeviceState;
     public DeviceState UpdateStateOnActionCollision(DeviceState currentState, DeviceState targetDeviceState, DeviceState newDeviceState)
     {
         SaveAction(newDeviceState);

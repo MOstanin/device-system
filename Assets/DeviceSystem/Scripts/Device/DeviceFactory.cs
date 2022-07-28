@@ -1,18 +1,16 @@
 ﻿using Zenject;
 
-public class DeviceFactory 
+public class DeviceFactory
 {
-    readonly Device.Factory _factory;
-
-    readonly AnalogAction _analogChangeState;
-    readonly DiscreteAction _digitalChangeState;
-
-    readonly CancelColisionHandler _cancelColisionHandler;
-    readonly WarningColisionHandler _warningColisionHandler;
-    readonly WatingColisionHandler _waitingColisionHandler;
+    private readonly Device.Factory _factory;
+    private readonly AnalogAction _analogChangeState;
+    private readonly DiscreteAction _digitalChangeState;
+    private readonly CancelColisionHandler _cancelColisionHandler;
+    private readonly WarningColisionHandler _warningColisionHandler;
+    private readonly WatingColisionHandler _waitingColisionHandler;
 
     [Inject]
-    public DeviceFactory(Device.Factory factory, AnalogAction analogChangeState, DiscreteAction digitalChangeState, 
+    public DeviceFactory(Device.Factory factory, AnalogAction analogChangeState, DiscreteAction digitalChangeState,
         CancelColisionHandler cancelColisionHandler, WarningColisionHandler warningColisionHandler, WatingColisionHandler waitingColisionHandler)
     {
         _factory = factory;

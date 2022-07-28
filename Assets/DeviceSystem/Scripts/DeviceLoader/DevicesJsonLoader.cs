@@ -4,9 +4,8 @@ using Zenject;
 public class DevicesJsonLoader : IInitializable
 {
     [Inject]
-    DeviceManager _deviceManager;
-
-    string file = "Devices";
+    private readonly DeviceManager _deviceManager;
+    private readonly string file = "Devices";
 
     public void Initialize()
     {
@@ -49,7 +48,7 @@ public class DevicesJsonLoader : IInitializable
     private void CreateDevicesFromJSON(string jsonString)
     {
         DevicesScheme deviceScheme = JsonUtility.FromJson<DevicesScheme>(jsonString);
-        
+
         if (deviceScheme.deviceArray == null)
         {
             throw new System.Exception("Incorrect JSON scheme.");

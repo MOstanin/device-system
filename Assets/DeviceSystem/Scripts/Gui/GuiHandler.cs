@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using Zenject;
 
-public class GuiHandler: MonoBehaviour
+public class GuiHandler : MonoBehaviour
 {
     public InputField idField;
     public InputField xField;
@@ -10,9 +10,8 @@ public class GuiHandler: MonoBehaviour
     public InputField zField;
 
     public Text deviceList;
-
-    DeviceManager _deviceManager;
-    DevicesJsonLoader _devicesJsonLoader;
+    private DeviceManager _deviceManager;
+    private DevicesJsonLoader _devicesJsonLoader;
 
     [Inject]
     public void Construct(DeviceManager deviceManager, DevicesJsonLoader devicesJsonLoader)

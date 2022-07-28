@@ -2,10 +2,11 @@ using System;
 using UnityEngine;
 using Zenject;
 
-public class GameInsaller : MonoInstaller {
+public class GameInsaller : MonoInstaller
+{
 
     [Inject]
-    Settings _settings = null;
+    private readonly Settings _settings = null;
 
     public override void InstallBindings()
     {
