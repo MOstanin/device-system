@@ -1,11 +1,10 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Zenject;
 
 public class Device : MonoBehaviour
 {
     IActionCollision _collisionHandler;
-    IChangeState _changeState;
+    IAction _changeState;
 
     DeviceState _deviceState;
     DeviceState _targerDeviceState;
@@ -28,7 +27,7 @@ public class Device : MonoBehaviour
     }
 
     [Inject]
-    public void Construct(IChangeState changeState, IActionCollision collisionHandler)
+    public void Construct(IAction changeState, IActionCollision collisionHandler)
     {
         _collisionHandler = collisionHandler;
         _changeState = changeState;
@@ -82,7 +81,7 @@ public class Device : MonoBehaviour
         transform.position = _deviceState.position;
     }
 
-    public class Factory : PlaceholderFactory<IChangeState, IActionCollision, Device>
+    public class Factory : PlaceholderFactory<IAction, IActionCollision, Device>
     {
 
     }

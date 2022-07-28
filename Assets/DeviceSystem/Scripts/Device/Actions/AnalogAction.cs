@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public  class AnalogChangeState : IChangeState
+public  class AnalogAction : IAction
 {
     float speed = 0.1f;
 

@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public interface IChangeState
+﻿public interface IAction
 {
     public DeviceState ChangeState(DeviceState oldState, DeviceState newState);
 }

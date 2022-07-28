@@ -18,14 +18,14 @@ public class GameInsaller : MonoInstaller {
     {
 
         Container.Bind<DeviceFactory>().AsSingle();
-        Container.Bind<AnalogChangeState>().WhenInjectedInto<DeviceFactory>();
-        Container.Bind<DigitalChangeState>().WhenInjectedInto<DeviceFactory>();
+        Container.Bind<AnalogAction>().WhenInjectedInto<DeviceFactory>();
+        Container.Bind<DiscreteAction>().WhenInjectedInto<DeviceFactory>();
 
         Container.Bind<CancelColisionHandler>().WhenInjectedInto<DeviceFactory>();
         Container.Bind<WarningColisionHandler>().WhenInjectedInto<DeviceFactory>();
         Container.Bind<WatingColisionHandler>().WhenInjectedInto<DeviceFactory>();
 
-        Container.BindFactory<IChangeState, IActionCollision, Device, Device.Factory>()
+        Container.BindFactory<IAction, IActionCollision, Device, Device.Factory>()
             .FromComponentInNewPrefab(_settings.DevicePrefab)
             .WithGameObjectName("Device")
             .UnderTransformGroup("Devices");
