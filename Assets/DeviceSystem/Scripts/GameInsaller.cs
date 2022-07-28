@@ -46,5 +46,6 @@ public class GameInsaller : MonoInstaller
     public class Settings
     {
         public GameObject DevicePrefab;
+        public float deviceSpeed;
     }
 }

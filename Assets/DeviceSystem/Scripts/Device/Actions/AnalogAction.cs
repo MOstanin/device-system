@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
+using Zenject;
 
 public class AnalogAction : IAction
 {
-    private readonly float speed = 0.1f;
+    [Inject]
+    private readonly GameInsaller.Settings _settings;
 
     public DeviceState ChangeState(DeviceState oldState, DeviceState newState)
     {
@@ -13,9 +15,12 @@ public class AnalogAction : IAction
 
     private Vector3 UpdatePosition(Vector3 oldPos, Vector3 newPos)
     {
-        Vector3 position = new Vector3();
+        Vector3 position;
+
+        float speed = _settings.deviceSpeed;
         var v = newPos - oldPos;
         var delta = Time.deltaTime * speed;
+
         if (v.sqrMagnitude > delta)
         {
             position = oldPos + v.normalized * delta;

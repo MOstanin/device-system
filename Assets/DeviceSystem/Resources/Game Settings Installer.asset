@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb8d4dea6aa3104bbe7167d00f85f5a, type: 3}
   m_Name: Game Settings Installer
   m_EditorClassIdentifier: 
-  GameInstaller:
+  _gameInstaller:
     DevicePrefab: {fileID: 835620506227816139, guid: 4e7e18e41b6c26a46a1f20a4c880b829, type: 3}
+    deviceSpeed: 0.3
