@@ -25,7 +25,7 @@ public class GameInsaller : MonoInstaller {
         Container.Bind<WarningColisionHandler>().WhenInjectedInto<DeviceFactory>();
         Container.Bind<WatingColisionHandler>().WhenInjectedInto<DeviceFactory>();
 
-        Container.BindFactory<IChangeState, ICollisionHandler, Device, Device.Factory>()
+        Container.BindFactory<IChangeState, IActionCollision, Device, Device.Factory>()
             .FromComponentInNewPrefab(_settings.DevicePrefab)
             .WithGameObjectName("Device")
             .UnderTransformGroup("Devices");

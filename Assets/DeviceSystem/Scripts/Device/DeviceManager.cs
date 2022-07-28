@@ -14,31 +14,36 @@ public class DeviceManager
         _deviceFactory = deviceFactory;
     }
 
-    public void AddDevice(Device.DeviceTypes deviceType)
+    public void AddDevice(Device.DeviceTypes deviceType, Device.ActionCollisionTypes collisionType)
     {
-        var device = _deviceFactory.Create(deviceType);
+        var device = _deviceFactory.Create(deviceType, collisionType);
+        device.DeviceType = deviceType;
+        device.ActionCollisionType = collisionType;
         _devices.Add(device);
     }
 
     public void SendAction(int id, Vector3 vector3)
     {
         var newState = new DeviceState(vector3);
-        _devices[id]?.SetState(newState);
-    }
-
-    public string GetDeviceStringList()
-    {
-        string devices = "";
-        for (int i = 0; i < _devices.Count; i++)
-        {
-            devices += "Device id: " + i + "\n";
-        }
-        return devices;
+        _devices[id]?.SendAction(newState);
     }
 
     public List<Device> GetDevices()
     {
         return _devices;
+    }
+
+    public string GetDeviceStringList()
+    {
+        string devicesTextList = "";
+        for (int i = 0; i < _devices.Count; i++)
+        {
+            devicesTextList += "Device id: " + i + ", ";
+            devicesTextList += "type: " + _devices[i].DeviceType.ToString() + ", ";
+            devicesTextList += "action collison: " + _devices[i].ActionCollisionType.ToString();
+            devicesTextList += "\n";
+        }
+        return devicesTextList;
     }
 }
 

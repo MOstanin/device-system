@@ -24,12 +24,12 @@ public class GuiHandler: MonoBehaviour
 
     public void AddAnalogDevice()
     {
-        _deviceManager.AddDevice(Device.DeviceTypes.Analog);
+        _deviceManager.AddDevice(Device.DeviceTypes.Analog, Device.ActionCollisionTypes.WaitAction);
     }
 
     public void AddDigitalDevice()
     {
-        _deviceManager.AddDevice(Device.DeviceTypes.Digital);
+        _deviceManager.AddDevice(Device.DeviceTypes.Digital, Device.ActionCollisionTypes.WarningAction);
     }
 
     public void SendAction()

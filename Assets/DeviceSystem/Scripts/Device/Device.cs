@@ -4,36 +4,73 @@ using Zenject;
 
 public class Device : MonoBehaviour
 {
-    ICollisionHandler _collisionHandler;
+    IActionCollision _collisionHandler;
     IChangeState _changeState;
+
     DeviceState _deviceState;
     DeviceState _targerDeviceState;
 
+    bool isBusy;
 
-    public enum DeviceTypes { Analog, Digital };
-    private DeviceTypes deviceType;
-
+    public enum DeviceTypes { Analog, Digital, CancelAction, WaitAction, warningAction};
+    private DeviceTypes _deviceType;
     public DeviceTypes DeviceType { 
-        get => deviceType; 
-        private set => deviceType = value; 
+        get => _deviceType; 
+        set => _deviceType = value; 
+    }
+
+    public enum ActionCollisionTypes {CancelAction, WaitAction, WarningAction };
+    private ActionCollisionTypes _actionCollisionType;
+    public ActionCollisionTypes ActionCollisionType
+    {
+        get => _actionCollisionType;
+        set => _actionCollisionType = value;
     }
 
     [Inject]
-    public void Construct(IChangeState changeState, ICollisionHandler collisionHandler)
+    public void Construct(IChangeState changeState, IActionCollision collisionHandler)
     {
         _collisionHandler = collisionHandler;
         _changeState = changeState;
     }
 
-    public void SetState(DeviceState newState)
+    public void SendAction(DeviceState newState)
     {
-        _targerDeviceState = newState;
+        if (isBusy)
+        {
+            _targerDeviceState = _collisionHandler.UpdateStateOnActionCollision(_deviceState, _targerDeviceState, newState);
+        }
+        else
+        {
+            _targerDeviceState = newState;
+        }
     }
 
     private void Update()
     {
         ChageState();
         ApplayState();
+        CheckActionStatus();
+    }
+
+    private void CheckActionStatus()
+    {
+        if ((_deviceState.position - _targerDeviceState.position).magnitude == 0)
+        {
+            //проверка на незавиршилось ли действие только что 
+            if (isBusy)
+            {
+                _targerDeviceState = _collisionHandler.UpdateStateOnActionFinish(_deviceState);
+            }
+            else
+            {
+                isBusy = false;
+            }
+        }
+        else
+        {
+            isBusy = true;
+        }
     }
 
     private void ChageState()
@@ -45,7 +82,7 @@ public class Device : MonoBehaviour
         transform.position = _deviceState.position;
     }
 
-    public class Factory : PlaceholderFactory<IChangeState, ICollisionHandler, Device>
+    public class Factory : PlaceholderFactory<IChangeState, IActionCollision, Device>
     {
 
     }

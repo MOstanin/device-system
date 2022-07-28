@@ -1,0 +1,24 @@
+{
+  "deviceArray": [
+    {
+      "deviceType": 0,
+      "actionColisionType": 0
+    },
+    {
+      "deviceType": 0,
+      "actionColisionType": 1
+    },
+    {
+      "deviceType": 0,
+      "actionColisionType": 2
+    },
+    {
+      "deviceType": 1,
+      "actionColisionType": 0
+    },
+    {
+      "deviceType": 1,
+      "actionColisionType": 1
+    }
+  ]
+}

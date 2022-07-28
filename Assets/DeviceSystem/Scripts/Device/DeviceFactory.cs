@@ -1,5 +1,4 @@
-﻿using System;
-using Zenject;
+﻿using Zenject;
 
 public class DeviceFactory 
 {
@@ -24,18 +23,35 @@ public class DeviceFactory
         _waitingColisionHandler = waitingColisionHandler;
     }
 
-    public Device Create(Device.DeviceTypes type)
+    public Device Create(Device.DeviceTypes deviceType, Device.ActionCollisionTypes collisionType)
     {
-        if (type == Device.DeviceTypes.Analog)
+        if (deviceType == Device.DeviceTypes.Analog)
         {
-            return _factory.Create(_analogChangeState, _cancelColisionHandler);
-
+            return CreateDevice(_analogChangeState, collisionType);
         }
-        else if (type == Device.DeviceTypes.Digital)
+        else if (deviceType == Device.DeviceTypes.Digital)
         {
-            return _factory.Create(_digitalChangeState, _cancelColisionHandler);
+            return CreateDevice(_digitalChangeState, collisionType);
         }
 
-        throw new System.Exception("Incorrect type");
+        throw new System.Exception("Incorrect device type");
+    }
+
+    private Device CreateDevice(IChangeState changeState, Device.ActionCollisionTypes collisionType)
+    {
+        if (collisionType == Device.ActionCollisionTypes.CancelAction)
+        {
+            return _factory.Create(changeState, _cancelColisionHandler);
+        }
+        else if (collisionType == Device.ActionCollisionTypes.WaitAction)
+        {
+            return _factory.Create(changeState, _waitingColisionHandler);
+        }
+        else if (collisionType == Device.ActionCollisionTypes.WarningAction)
+        {
+            return _factory.Create(changeState, _warningColisionHandler);
+        }
+
+        throw new System.Exception("Incorrect device type");
     }
 }
