@@ -4,7 +4,7 @@ using Zenject;
 public class AnalogAction : IAction
 {
     [Inject]
-    private readonly GameInsaller.Settings _settings;
+    public float speed;
 
     public DeviceState ChangeState(DeviceState oldState, DeviceState newState)
     {
@@ -17,7 +17,6 @@ public class AnalogAction : IAction
     {
         Vector3 position;
 
-        float speed = _settings.deviceSpeed;
         var v = newPos - oldPos;
         var delta = Time.deltaTime * speed;
 

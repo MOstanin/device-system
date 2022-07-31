@@ -7,11 +7,11 @@ public class DeviceFactory
     private readonly DiscreteAction _digitalChangeState;
     private readonly CancelColisionHandler _cancelColisionHandler;
     private readonly WarningColisionHandler _warningColisionHandler;
-    private readonly WatingColisionHandler _waitingColisionHandler;
+    private readonly WaitingColisionHandler _waitingColisionHandler;
 
     [Inject]
     public DeviceFactory(Device.Factory factory, AnalogAction analogChangeState, DiscreteAction digitalChangeState,
-        CancelColisionHandler cancelColisionHandler, WarningColisionHandler warningColisionHandler, WatingColisionHandler waitingColisionHandler)
+        CancelColisionHandler cancelColisionHandler, WarningColisionHandler warningColisionHandler, WaitingColisionHandler waitingColisionHandler)
     {
         _factory = factory;
         _analogChangeState = analogChangeState;

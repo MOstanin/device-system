@@ -44,6 +44,11 @@ public class Device : MonoBehaviour
         }
     }
 
+    public DeviceState GetState()
+    {
+        return _deviceState;
+    }
+
     private void Update()
     {
         ChageState();

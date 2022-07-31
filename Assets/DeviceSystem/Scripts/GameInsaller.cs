@@ -19,12 +19,12 @@ public class GameInsaller : MonoInstaller
     {
 
         Container.Bind<DeviceFactory>().AsSingle();
-        Container.Bind<AnalogAction>().WhenInjectedInto<DeviceFactory>();
+        Container.Bind<AnalogAction>().WithArguments(_settings.deviceSpeed).WhenInjectedInto<DeviceFactory>();
         Container.Bind<DiscreteAction>().WhenInjectedInto<DeviceFactory>();
 
         Container.Bind<CancelColisionHandler>().WhenInjectedInto<DeviceFactory>();
         Container.Bind<WarningColisionHandler>().WhenInjectedInto<DeviceFactory>();
-        Container.Bind<WatingColisionHandler>().WhenInjectedInto<DeviceFactory>();
+        Container.Bind<WaitingColisionHandler>().WhenInjectedInto<DeviceFactory>();
 
         Container.BindFactory<IAction, IActionCollision, Device, Device.Factory>()
             .FromComponentInNewPrefab(_settings.DevicePrefab)
