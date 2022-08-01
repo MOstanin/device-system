@@ -1,9 +1,9 @@
 ﻿public class WaitingColisionHandler : IActionCollision
 {
     private DeviceState nextDeviceState;
-    public DeviceState UpdateStateOnActionCollision(DeviceState currentState, DeviceState targetDeviceState, DeviceState newDeviceState)
+    public DeviceState UpdateStateOnActionCollision(DeviceState currentState, DeviceState targetDeviceState, DeviceState newTargetDeviceState)
     {
-        SaveAction(newDeviceState);
+        SaveAction(newTargetDeviceState);
         return targetDeviceState;
     }
 

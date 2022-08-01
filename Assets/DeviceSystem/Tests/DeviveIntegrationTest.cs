@@ -91,7 +91,6 @@ public class DeviveIntegrationTest : ZenjectIntegrationTestFixture
         Vector3 speedDirectionTarget2;
 
         yield return null;
-
         device.SendAction(targetDeviceState1);
 
         yield return null;
@@ -99,11 +98,9 @@ public class DeviveIntegrationTest : ZenjectIntegrationTestFixture
 
         yield return null;
         DeviceState deviceState2 = device.GetState();
-
         speedDirectionTarget1 = Vector3.Normalize(deviceState2.position - deviceState1.position);
 
         yield return null;
-
         device.SendAction(targetDeviceState2);
 
         yield return null;
@@ -113,7 +110,7 @@ public class DeviveIntegrationTest : ZenjectIntegrationTestFixture
         DeviceState deviceState4 = device.GetState();
         speedDirectionTarget2 = Vector3.Normalize(deviceState4.position - deviceState3.position);
 
-
+        //For Cancel collision behavior, the speed direction it should be changed
         Assert.NotZero((int)(speedDirectionTarget2 - speedDirectionTarget1).sqrMagnitude * 1000);
 
         yield break;
@@ -131,9 +128,20 @@ public class DeviveIntegrationTest : ZenjectIntegrationTestFixture
 
         var device = deviceFactory.Create(analogAction, waitColision);
 
+        DeviceState targetDeviceState1 = new DeviceState
+        {
+            position = new Vector3(2, 0, 0)
+        };
+
+        DeviceState targetDeviceState2 = new DeviceState
+        {
+            position = new Vector3(-2, -2, -2)
+        };
+
+        Vector3 speedDirectionTarget1;
+        Vector3 speedDirectionTarget2;
+
         yield return null;
-        DeviceState targetDeviceState1 = new DeviceState();
-        targetDeviceState1.position = new Vector3(2, 0, 0);
         device.SendAction(targetDeviceState1);
 
         yield return null;
@@ -141,12 +149,9 @@ public class DeviveIntegrationTest : ZenjectIntegrationTestFixture
 
         yield return null;
         DeviceState deviceState2 = device.GetState();
-
-        var speedDirectionTarget1 = deviceState2.position - deviceState1.position;
+        speedDirectionTarget1 = Vector3.Normalize(deviceState2.position - deviceState1.position);
 
         yield return null;
-        DeviceState targetDeviceState2 = new DeviceState();
-        targetDeviceState2.position = new Vector3(-2, 0, 0);
         device.SendAction(targetDeviceState2);
 
         yield return null;
@@ -154,8 +159,10 @@ public class DeviveIntegrationTest : ZenjectIntegrationTestFixture
 
         yield return null;
         DeviceState deviceState4 = device.GetState();
-        var speedDirectionTarget2 = deviceState4.position - deviceState3.position;
+        speedDirectionTarget2 = Vector3.Normalize(deviceState4.position - deviceState3.position);
 
+
+        //For Wait collision behavior, the speed direction it should be changed after finishing the first action
         Assert.Zero((int)(speedDirectionTarget2 - speedDirectionTarget1).sqrMagnitude * 1000);
 
         while (device.GetState().position != targetDeviceState1.position)
@@ -181,9 +188,20 @@ public class DeviveIntegrationTest : ZenjectIntegrationTestFixture
 
         var device = deviceFactory.Create(analogAction, warningColision);
 
+        DeviceState targetDeviceState1 = new DeviceState
+        {
+            position = new Vector3(2, 0, 0)
+        };
+
+        DeviceState targetDeviceState2 = new DeviceState
+        {
+            position = new Vector3(-2, -2, -2)
+        };
+
+        Vector3 speedDirectionTarget1;
+        Vector3 speedDirectionTarget2;
+
         yield return null;
-        DeviceState targetDeviceState1 = new DeviceState();
-        targetDeviceState1.position = new Vector3(2, 0, 0);
         device.SendAction(targetDeviceState1);
 
         yield return null;
@@ -191,12 +209,9 @@ public class DeviveIntegrationTest : ZenjectIntegrationTestFixture
 
         yield return null;
         DeviceState deviceState2 = device.GetState();
-
-        var speedDirectionTarget1 = deviceState2.position - deviceState1.position;
+        speedDirectionTarget1 = Vector3.Normalize(deviceState2.position - deviceState1.position);
 
         yield return null;
-        DeviceState targetDeviceState2 = new DeviceState();
-        targetDeviceState2.position = new Vector3(-2, 0, 0);
         device.SendAction(targetDeviceState2);
 
         yield return null;
@@ -204,7 +219,10 @@ public class DeviveIntegrationTest : ZenjectIntegrationTestFixture
 
         yield return null;
         DeviceState deviceState4 = device.GetState();
-        var speedDirectionTarget2 = deviceState4.position - deviceState3.position;
+        speedDirectionTarget2 = Vector3.Normalize(deviceState4.position - deviceState3.position);
+
+
+        //For Warning collision behavior, the speed direction it should not be changed
 
         Assert.Zero((int)(speedDirectionTarget2 - speedDirectionTarget1).sqrMagnitude * 1000);
 
